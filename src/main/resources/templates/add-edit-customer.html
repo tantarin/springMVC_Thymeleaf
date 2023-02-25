@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Add Customer</title>
+</head>
+
+<body>
+<h3 th:if="${customer.id == null}">Add Customer</h3>
+<h3 th:if="${customer.id != null}">Edit Customer</h3>
+<form th:action="@{/createOrUpdateCustomer}"
+      th:object="${customer}" method="post">
+    <label for="name"> First Name</label>
+    <input type="text" th:field="*{name}" id="name"
+           placeholder="First Name"/>
+    <label for="lastName"> Last Name </label>
+    <input type="text" th:field="*{surname}"
+           id="lastName" placeholder="Last Name"/>
+    <label for="email"> Email</label>
+    <input type="text" th:field="*{email}" id="email"
+           placeholder="Email address"/>
+    <input type="submit" value="Press">
+</form>
+</body>
+</html>
