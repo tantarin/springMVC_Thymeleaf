@@ -40,8 +40,14 @@ public class CustomerService {
         return customerRepository.save(customer);
     }
 
-    public void delete(Long id) {
-        customerRepository.deleteById(id);
+    /**
+     * Delete customer based on the customer ID.
+     * @param customerId
+     * @return boolean flag showing the request status
+     */
+    public boolean delete(Long customerId) {
+        customerRepository.deleteById(customerId);
+        return true;
     }
 
 }
