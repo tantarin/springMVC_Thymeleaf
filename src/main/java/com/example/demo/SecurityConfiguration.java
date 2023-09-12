@@ -21,34 +21,45 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfiguration {
 
+//    @Bean
+//    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+//        http.csrf()
+//                .disable()
+//                .authorizeRequests()
+//                .antMatchers("/admin/**")
+//                .hasRole("ADMIN")
+//                .antMatchers("/anonymous*")
+//                .anonymous()
+//                .antMatchers("/login*")
+//                .permitAll()
+//                .anyRequest()
+//                .authenticated()
+//                .and()
+//                .formLogin()
+//                .loginPage("/login")
+//                .loginProcessingUrl("/perform_login")
+//                .defaultSuccessUrl("/homepage.html", true)
+//                // .failureUrl("/login.html?error=true")
+//                .failureHandler(authenticationFailureHandler())
+//                .and()
+//                .logout()
+//                .logoutUrl("/perform_logout")
+//                .deleteCookies("JSESSIONID")
+//                .logoutSuccessHandler(logoutSuccessHandler());
+//        // .and()
+//        // .exceptionHandling().accessDeniedPage("/accessDenied");
+//        // .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+//        return http.build();
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf()
-                .disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
-                .antMatchers("/anonymous*")
-                .anonymous()
-                .antMatchers("/login*")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+
+        http.authorizeRequests()
+                .antMatchers("/login").permitAll()
+                .antMatchers("/**").authenticated()
                 .and()
-                .formLogin()
-                .loginPage("/login.html")
-                .loginProcessingUrl("/perform_login")
-                .defaultSuccessUrl("/homepage.html", true)
-                // .failureUrl("/login.html?error=true")
-                .failureHandler(authenticationFailureHandler())
-                .and()
-                .logout()
-                .logoutUrl("/perform_logout")
-                .deleteCookies("JSESSIONID")
-                .logoutSuccessHandler(logoutSuccessHandler());
-        // .and()
-        // .exceptionHandling().accessDeniedPage("/accessDenied");
-        // .exceptionHandling().accessDeniedHandler(accessDeniedHandler());
+                .formLogin().permitAll();
         return http.build();
     }
 
